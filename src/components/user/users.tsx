@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { IUser } from '../../model/user.model';
 import { connect } from 'react-redux';
-import { userList, deleteUser } from '../../actions/index';
+// import PropTypes from 'prop-types';
+import { userList, deleteUser} from '../../actions/index';
 import './users.css';
 
 interface Props {
@@ -39,7 +40,7 @@ class User extends Component<Props,State>{
            <div>
                <br></br>
                <table className="table">
-                   <thead>
+               <tbody>
                     <tr>
                         <th>姓名</th>
                         <th>性别</th>
@@ -48,18 +49,16 @@ class User extends Component<Props,State>{
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
-                   </thead>
-                   <tbody>
                         {this.props.users.map( user => {
                             const userId = user.userId
-                            return <tr key={user.userId}> 
+                            return (<tr key={user.userId}> 
                                     <td>{user.userName}</td> 
                                     <td>{user.userSex}</td>
                                     <td>{user.userAge}</td>
                                     <td>{user.userNo}</td>
                                     <td>{user.userState}</td>
                                     <td><button type="button" onClick={()=>this.deleteUser(userId)}>删除</button></td>
-                                    </tr>
+                                    </tr>)
                         })}
                     </tbody>
                 </table>
@@ -68,6 +67,11 @@ class User extends Component<Props,State>{
     }
 }
 
+// PropTypes.propTypes  = {
+//     userList: PropTypes.func.isRequired,
+//     deleteUser: PropTypes.func.isRequired,
+//     User: PropTypes.array.isRequired,
+// }
 const mapStateToProps = (state:State) => ({
     users: state.users
 }) 

@@ -1,6 +1,8 @@
 import  { combineReducers } from 'redux'
-import userList from './../components/user/userReducer';
+// import {addUser, deleteUser, fetchUser} from './../components/user/userReducer';
 
-export default combineReducers({
-  userlist:userList
-});
+// const reducer = combineReducers({
+//   fetchUser
+// })
+
+// export default reducer;

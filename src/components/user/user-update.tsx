@@ -1,25 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { IUser } from './../../model/user.model';
+import { addUser } from './../../actions/index';
 
 interface Props {
-
-}
-interface State {
-
+    addUser(userBody:Object):void;
 }
 
 export class UserUpdate extends Component<Props, IUser> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            userName: "",
-            userSex: "",
-            userAge: 1,
-            userNo: "",
-            userPhoneNum: "",
-            userState: ""
-        }
         this.onChange = this.onChange.bind(this);
         this.onsubmit = this.onsubmit.bind(this);
     }
@@ -38,16 +28,16 @@ export class UserUpdate extends Component<Props, IUser> {
             userSex: this.state.userSex,
             userState: this.state.userState
         }
-
+        this.props.addUser(userObject)
         // const user2 = { userName: 'xiaoxi0', userSex: '女', userAge: 3, userNo: '2019006', userPhoneNum: '15592487006', userState: '在线' }
 
-        fetch("http://localhost:8081/rest/user", {
-            method: "post",
-            headers: {
-                "content-Type": "application/json"
-            },
-            body: JSON.stringify(userObject)
-        }).then(res => res.json()).then(data => console.log(data))
+        // fetch("http://localhost:8081/rest/user", {
+        //     method: "post",
+        //     headers: {
+        //         "content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(userObject)
+        // }).then(res => res.json()).then(data => console.log(data))
     }
 
 
@@ -89,7 +79,7 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = {
-
+    addUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate)

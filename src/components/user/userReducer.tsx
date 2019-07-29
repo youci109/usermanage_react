@@ -1,17 +1,21 @@
-import { FETCH_USERLIST } from '../../config/contant'
+import { FETCH_USERLIST, DELETE_USER } from '../../config/contant'
 
 const userState ={
     users: []
 }
 
-export type PointsState = Readonly<typeof userState>;
+export type userListState = Readonly<typeof userState>;
 
-export default  (state:PointsState = userState,action: any):PointsState =>{
-    console.log("789");
+export default  (state:userListState = userState,action: any):userListState =>{
     switch (action.type) {
         case FETCH_USERLIST:
-           return {...state}
+                console.log("获取用户reducer");
+            return {...state,users: action.payload}
+        case DELETE_USER:
+            console.log("删除用户reducer"); 
+            return {...state}
         default:
             return state;
     }
 }
+

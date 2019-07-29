@@ -1,13 +1,18 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/index';
-import { userList } from '../actions/index'
+import rootReducer from '../components/user/userReducer'
 
-// const initialState = Array<IUser>
+const userState = {
+    users: []
+}
+
+interface Props {
+    userList():void;
+}
+
 const middleware = [thunk]
 
-const store = createStore(rootReducer,applyMiddleware(...middleware));
+const store = createStore(rootReducer,userState,applyMiddleware(...middleware));
 
-store.dispatch(userList())
 
 export default store;

@@ -1,6 +1,6 @@
 import  { combineReducers } from 'redux'
-import { userList } from './../actions/index';
+import userList from './../components/user/userReducer';
 
 export default combineReducers({
-  userList
+  userlist:userList
 });

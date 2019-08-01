@@ -1,11 +1,13 @@
-export interface IUser {
-    userId?:string,
-    userName?:string,
-    userSex?:string,
-    userAge?:number,
-    userNo?:string,
-    userPhoneNum?:string,
-    createTime?:Date,
-    modifyTime?:Date,
-    userState?:string
+export default interface IUser {
+    userId?:string|undefined,
+    userName?:string|undefined,
+    userSex?:string|undefined,
+    userAge?:string|undefined,
+    userNo?:string|undefined,
+    userPhoneNum?:string|undefined,
+    createTime?:string|undefined,
+    modifyTime?:string|undefined,
+    userState?:string|undefined
 }
+
+// export const defaultValue: Readonly<IUser> = {};

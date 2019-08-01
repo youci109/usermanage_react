@@ -4,6 +4,7 @@ export const FETCH_USERLIST = "FETCH_USERLIST";
 
 export const DELETE_USER = "DELETE_USER";
 export const ADD_USER = "ADD_USER";
+export const UPDATE_USER = "UPDATE_USER";
 
 
 

@@ -5,6 +5,10 @@ import { Dispatch } from 'react';
 export const  userList = () => {
     console.log("获取用户action");
 
+    // return {
+    //     type: constants.FETCH_USERLIST
+    // }
+
     return function (dispatch:Dispatch<any>) {
             fetch("http://localhost:8081/rest2/users")
         .then(res => res.json())
@@ -17,23 +21,6 @@ export const  userList = () => {
     }
 }   
 
-export function deleteUser(userId:string|undefined) {
-    console.log("删除用户action");
-    
-    return function (dispatch:Dispatch<any>) {
-        fetch("http://localhost:8081/rest/user?userId=" + userId , {
-            method: "delete",
-            headers: {
-                "content-Type": "application/json"
-            }
-        }).then(user =>
-            dispatch({
-            type: constants.DELETE_USER,
-            payload: user
-        }))
-        
-    }
-}
 
 export const addUser = (userBody:Object) => {
     console.log("添加用户action");
@@ -45,10 +32,29 @@ export const addUser = (userBody:Object) => {
             },
             body: JSON.stringify(userBody)
         }).then(res => res.json()).then(user =>
-                dispatch({
+            dispatch({
                 type: constants.ADD_USER,
                 payload: user
             })
-        )
+            )
+    }
+}
+
+export function deleteUser(userId:string|undefined, index:any) {
+    console.log("删除用户action");
+    
+    return function (dispatch:Dispatch<any>) {
+        fetch("http://localhost:8081/rest/user?userId=" + userId , {
+                method: "delete",
+                headers: {
+                    "content-Type": "application/json"
+                }
+            }).then( delet => {
+                dispatch({
+                    type: constants.DELETE_USER,
+                    payload: index
+                })
+            })
+        
     }
 }

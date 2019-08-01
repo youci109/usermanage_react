@@ -1,85 +1,99 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { IUser } from './../../model/user.model';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import IUser from './../../model/user.model';
 import { addUser } from './../../actions/index';
+import { Layout, Form, Icon, Input, Button } from 'antd';
+import { IRootState } from '../../reducers'
+import { Dispatch } from 'react';
+
 
 interface Props {
-    addUser(userBody:Object):void;
+    user: IUser;
+    onChange(e: any): void;
+    saveUser(e: any): void;
 }
-
-export class UserUpdate extends Component<Props, IUser> {
+class UserUpdate extends Component<Props>{
     constructor(props: Props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
-        this.onsubmit = this.onsubmit.bind(this);
     }
 
-    onChange(e: any) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+    handleSubmit = () => {
+        const { user } = this.props;
+        this.props.saveUser(user)
     }
-
-    onsubmit(e: any) {
-        // e.preventDefault();
-
-        const userObject = {
-            userName: this.state.userName,
-            userSex: this.state.userSex,
-            userState: this.state.userState
-        }
-        this.props.addUser(userObject)
-        // const user2 = { userName: 'xiaoxi0', userSex: '女', userAge: 3, userNo: '2019006', userPhoneNum: '15592487006', userState: '在线' }
-
-        // fetch("http://localhost:8081/rest/user", {
-        //     method: "post",
-        //     headers: {
-        //         "content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(userObject)
-        // }).then(res => res.json()).then(data => console.log(data))
-    }
-
 
     render() {
+
+        const tailFormItemLayout = {
+            wrapperCol: {
+                xs: {
+                    span: 24,
+                    offset: 0,
+                },
+                sm: {
+                    span: 16,
+                    offset: 8,
+                },
+            },
+        };
+
+        const { Header, Content } = Layout;
+
         return (
-            <div>
-                <h1>添加用户</h1>
-                <form onSubmit={this.onsubmit}>
-                    <div>
-                        <label htmlFor="">姓名</label>
-                        <input type="text" name="userName" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="">性别</label>
-                        <input type="text" name="userSex" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="">年龄</label>
-                        <input type="text" name="userAge" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="">编号</label>
-                        <input type="text" name="userNo" onChange={this.onChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="">状态</label>
-                        <input type="text" name="userState" onChange={this.onChange} />
-                    </div>
-                    <button type="submit">提交</button>
-                    <button type="button"> 返回</button>
-                </form>
+            <div >
+                <Layout>
+                    <Header style={{ backgroundColor: "#1890ff" }} >
+                        <h1 style={{ color: "white" }}>添加用户</h1>
+                    </Header>
+                    <Content style={{ marginLeft: 200, marginRight: 200 }}>
+                        <Form onSubmit={this.handleSubmit} className="login-form">
+                            <Form.Item>
+                                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} name="userName"
+
+                                    defaultValue={this.props.user.userName} onChange={this.props.onChange} placeholder="姓名" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Input name="userSex" onChange={this.props.onChange}
+                                    defaultValue={this.props.user.userSex} placeholder="性别" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Input name="userAge" onChange={this.props.onChange}
+                                    defaultValue={this.props.user.userAge} placeholder="年龄" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Input name="userNo" onChange={this.props.onChange}
+                                    defaultValue={this.props.user.userNo} placeholder="编号" />
+                            </Form.Item>
+                            <Form.Item>
+                                <Input name="userState" onChange={this.props.onChange}
+                                    defaultValue={this.props.user.userState} placeholder="状态" />
+                            </Form.Item>
+                            <Form.Item {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit" style={{ marginRight: 10 }}>注册</Button>
+                            </Form.Item>
+                        </Form>
+                    </Content>
+                </Layout>
             </div>
         )
     }
 }
 
-const mapStateToProps = () => ({
 
+
+const mapStateToProps = (state: IRootState) => ({
+    user: state.updateUser
 })
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    onChange(e: any) {
+        dispatch({ type: "UPDATE_USER", payload: { [e.target.name]: e.target.value } });
+    },
+    saveUser(e: any) {
+        dispatch(addUser(e))
+    }
 
-const mapDispatchToProps = {
-    addUser
-}
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate)
+export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);
+
+

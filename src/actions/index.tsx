@@ -1,13 +1,9 @@
 import * as constants from '../config/contant'
 import { Dispatch } from 'react';
 
-
+// 获取用户
 export const  userList = () => {
     console.log("获取用户action");
-
-    // return {
-    //     type: constants.FETCH_USERLIST
-    // }
 
     return function (dispatch:Dispatch<any>) {
             fetch("http://localhost:8081/rest2/users")
@@ -21,7 +17,7 @@ export const  userList = () => {
     }
 }   
 
-
+// 添加用户
 export const addUser = (userBody:Object) => {
     console.log("添加用户action");
     return function (dispatch:Dispatch<any>) {
@@ -40,6 +36,7 @@ export const addUser = (userBody:Object) => {
     }
 }
 
+// 删除用户
 export function deleteUser(userId:string|undefined, index:any) {
     console.log("删除用户action");
     
@@ -56,5 +53,15 @@ export function deleteUser(userId:string|undefined, index:any) {
                 })
             })
         
+    }
+}
+
+// 更新用户输入
+export const updateUser =(input:any) => {
+    return function (dispatch:Dispatch<any>) {
+        dispatch({
+            type: constants.UPDATE_USER,
+            payload: input
+        })
     }
 }

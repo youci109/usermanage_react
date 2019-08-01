@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import IUser from './../../model/user.model';
-import { addUser } from './../../actions/index';
+import { addUser, updateUser } from './../../actions/index';
 import { Layout, Form, Icon, Input, Button } from 'antd';
 import { IRootState } from '../../reducers'
-import { Dispatch } from 'react';
-
 
 interface Props {
     user: IUser;
-    onChange(e: any): void;
-    saveUser(e: any): void;
+    updateUser(e: any): void;
+    addUser(e: any): void;
 }
 class UserUpdate extends Component<Props>{
     constructor(props: Props) {
@@ -19,7 +17,12 @@ class UserUpdate extends Component<Props>{
 
     handleSubmit = () => {
         const { user } = this.props;
-        this.props.saveUser(user)
+        this.props.addUser(user)
+    }
+
+    onChange = (e:any) => {
+        const userField  = { [e.target.name]: e.target.value };
+        this.props.updateUser(userField)
     }
 
     render() {
@@ -50,22 +53,22 @@ class UserUpdate extends Component<Props>{
                             <Form.Item>
                                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} name="userName"
 
-                                    defaultValue={this.props.user.userName} onChange={this.props.onChange} placeholder="姓名" />
+                                    defaultValue={this.props.user.userName} onChange={this.onChange} placeholder="姓名" />
                             </Form.Item>
                             <Form.Item>
-                                <Input name="userSex" onChange={this.props.onChange}
+                                <Input name="userSex" onChange={this.onChange}
                                     defaultValue={this.props.user.userSex} placeholder="性别" />
                             </Form.Item>
                             <Form.Item>
-                                <Input name="userAge" onChange={this.props.onChange}
+                                <Input name="userAge" onChange={this.onChange}
                                     defaultValue={this.props.user.userAge} placeholder="年龄" />
                             </Form.Item>
                             <Form.Item>
-                                <Input name="userNo" onChange={this.props.onChange}
+                                <Input name="userNo" onChange={this.onChange}
                                     defaultValue={this.props.user.userNo} placeholder="编号" />
                             </Form.Item>
                             <Form.Item>
-                                <Input name="userState" onChange={this.props.onChange}
+                                <Input name="userState" onChange={this.onChange}
                                     defaultValue={this.props.user.userState} placeholder="状态" />
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
@@ -84,15 +87,10 @@ class UserUpdate extends Component<Props>{
 const mapStateToProps = (state: IRootState) => ({
     user: state.updateUser
 })
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-    onChange(e: any) {
-        dispatch({ type: "UPDATE_USER", payload: { [e.target.name]: e.target.value } });
-    },
-    saveUser(e: any) {
-        dispatch(addUser(e))
-    }
-
-});
+const mapDispatchToProps = {
+    updateUser,
+    addUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserUpdate);
 

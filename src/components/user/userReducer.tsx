@@ -1,51 +1,54 @@
-import { FETCH_USERLIST, DELETE_USER, ADD_USER, UPDATE_USER } from '../../config/contant'
+import * as contants from '../../config/contant'
 import IUser from './../../model/user.model';
 
 const initstate = {
     users: [],
+    user:  {
+        userId :"",
+        userName:"",   
+        userSex:"",
+        userAge :"",
+        userNo :"",
+        userPhoneNum  :"",
+        createTime :"",
+        modifyTime :"",
+        userState :""
+    },
+    updateSuccess:false
 }
 export interface userState {
     users: Array<IUser>;
+    user: IUser,
+    updateSuccess:Boolean
 }
 
-// export type userListState = Readonly<typeof userState>;
 export default (state: userState = initstate, action: any): userState => {
     switch (action.type) {
-        case FETCH_USERLIST:
+        case contants.FETCH_USERLIST:
             console.log("获取用户reducer");
-            return { ...state, users: action.payload }
-        case DELETE_USER:
-            console.log("删除用户reducer");
-            // 进行深拷贝【注意深拷贝、浅拷贝问题】
-            state.users.splice(action.payload, 1)
-            const newState = JSON.parse(JSON.stringify(state));
-            return { ...state, ...newState }
+            const newStat = JSON.parse(JSON.stringify(state));
 
-        case ADD_USER:
-            return { ...state }
-
+            return { ...newStat,users: action.payload }
+        // case contants.DELETE_USER:
+        //     console.log("删除用户reducer");
+        //     // 进行深拷贝【注意深拷贝、浅拷贝问题】
+        //     state.users.splice(action.payload, 1)
+        //     const newState = JSON.parse(JSON.stringify(state));
+        //     return { ...state, ...newState }
+        case contants.UPDATE_USER:
+            return { ...state,
+                updateSuccess:true
+                ,user:action.payload}
+        case contants.GET_USER:
+                return {...state,user:action.payload}
+        case contants.ADD_USER:
+            return { ...state,updateSuccess:true}
+        case contants.RESET:
+                return {
+                    ...initstate
+                };
         default:
             return state;
-    }
-}
-
-const inituserstate = {
-    userName:"xiaoxi",   userId :"",
-    userSex:"",
-    userAge :"",
-    userNo :"",
-    userPhoneNum  :"",
-    createTime :"",
-    modifyTime :"",
-    userState :""
-}
-
-export const updateUser = (userstate: IUser = inituserstate, action: any): IUser => {
-    switch (action.type) {
-        case UPDATE_USER:
-            return { ...userstate, ...action.payload}
-        default:
-            return userstate;
     }
 }
 

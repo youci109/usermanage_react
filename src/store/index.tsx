@@ -14,4 +14,5 @@ const store = (initialState?: IRootState) =>
         /* user thunk //  */
         createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
 // store().dispatch({type:'ADD_USER'})
+
 export default store;

@@ -1,14 +1,17 @@
 import React from "react";
-import { Route, BrowserRouter } from 'react-router-dom';
-import User from './../components/user/users';
-import UserUpdate from '../components/user/user-update';
+import { Route, BrowserRouter,Switch} from 'react-router-dom';
+import UserRoute from "../components/user/index";
+
 
 const RootRouter = () => {
     return (
-        <BrowserRouter>
-            <Route path="/" exact={true} component={ User }/>
-            <Route path="/userUpdate" exact={true} component={UserUpdate}/>
-        </BrowserRouter>
+        <div>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/"  component={ UserRoute }/>
+                </Switch>
+            </BrowserRouter>
+        </div>
     )
 }
 

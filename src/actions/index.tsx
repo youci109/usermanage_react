@@ -1,18 +1,21 @@
 import * as constants from '../config/contant';
-import { Dispatch } from 'react';
 import axios from 'axios';
+import {push} from 'react-router-redux';
+import IUser from '../model/user.model';
+import { Dispatch } from 'redux';
 
-// 获取用户
+// 获取用户列表
 export const  userList = () => {
     console.log("获取用户action");
-
-    return function (dispatch:Dispatch<any>) {
+     
+        return function (dispatch:Dispatch<any>) {
+        // axios.get("api/api.json")
         axios.get("http://localhost:8081/rest2/users")
             .then(res =>{
-                    dispatch({
-                        type: constants.FETCH_USERLIST,
-                        payload: res.data
-                        })
+                dispatch({
+                    type: constants.FETCH_USERLIST,
+                    payload: res.data
+                    })
                 })
         
         // fetch("http://localhost:8081/rest2/users")
@@ -23,23 +26,25 @@ export const  userList = () => {
         //         payload: posts
         //         })
         //     )
-    }
-}   
+            }  
+} 
+   
 
 // 添加用户
-export const addUser = (userBody:Object) => {
+export const addUser =  (userBody:Object) => {
     console.log("添加用户action");
-    return function (dispatch:Dispatch<any>) {
-        axios.post("http://localhost:8081/rest/user",
+    return  function (dispatch:Dispatch<any>) {
+         axios.post("http://localhost:8081/rest/user",
                     JSON.stringify(userBody),
-                    {method:"post",headers:{"content-Type": "application/json"}}
-                ).then(res=>{
-                    dispatch({
-                        type: constants.ADD_USER,
-                        payload: res.data
+                    {method:"post",headers:{"content-Type": "application/json"}}).then(res=>{
+                        dispatch({
+                            type: constants.ADD_USER,
+                            payload: res.data
                         })
-                })
-               
+                    });
+
+            
+           
         // fetch("http://localhost:8081/rest/user", {
         //         method: "post",
         //         headers: {
@@ -53,22 +58,21 @@ export const addUser = (userBody:Object) => {
         //             payload: user
         //         })
         //     )
+       
     }
 }
 
 // 删除用户
-export function deleteUser(userId:string|undefined, index:any) {
+export function deleteUser(userId:any) {
     console.log("删除用户action");
     
     return function (dispatch:Dispatch<any>) {
         axios.delete("http://localhost:8081/rest/user?userId=" + userId)
-            .then(() => {
-                dispatch({
-                    type: constants.DELETE_USER,
-                    payload: index
-                })
+        .then(ref =>{
+                dispatch(userList())
             }
-        )
+        );
+         
         // fetch("http://localhost:8081/rest/user?userId=" + userId , {
         //         method: "delete",
         //         headers: {
@@ -85,7 +89,7 @@ export function deleteUser(userId:string|undefined, index:any) {
 }
 
 // 更新用户输入
-export const updateUser =(input:any) => {
+export const updateUserInput =(input:any) => {
     return function (dispatch:Dispatch<any>) {
         dispatch({
             type: constants.UPDATE_USER,
@@ -93,3 +97,22 @@ export const updateUser =(input:any) => {
         })
     }
 }
+
+// 获取用户信息
+export const getUser = (userId:string) => {
+    return function (dispatch:Dispatch<any>) {
+        axios.get("http://localhost:8081/rest/user",
+                {method:"get",params:{"userId":userId}})
+            .then(res =>{
+                dispatch({
+                    type: constants.GET_USER,
+                    payload: res.data
+                })
+            })
+    }
+}
+
+export const reset = () => ({
+    type: constants.RESET
+  });
+  

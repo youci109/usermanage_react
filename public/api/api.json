@@ -1,0 +1,13 @@
+{
+    "data": [{
+        "userId": "7469dbbb-be98-4bdb-975b-02e55190f6f7",
+        "userName": "xiaoxi1",
+        "userSex": "男",
+        "userAge": "24",
+        "userNo": "2019001",
+        "userPhoneNum": "15592487001",
+        "createTime": "Thu Aug 01 00: 00: 00 CST 2019",
+        "modifyTime": "Thu Aug 01 00: 00: 00 CST 2019",
+        "userState": "离线"
+    }]
+}

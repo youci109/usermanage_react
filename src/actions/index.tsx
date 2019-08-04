@@ -1,7 +1,5 @@
 import * as constants from '../config/contant';
 import axios from 'axios';
-import {push} from 'react-router-redux';
-import IUser from '../model/user.model';
 import { Dispatch } from 'redux';
 
 // 获取用户列表
@@ -62,6 +60,18 @@ export const addUser =  (userBody:Object) => {
     }
 }
 
+// 更新用户
+export const updateUser =  (userBody:Object) => {
+    console.log("更新用户action");
+    return  function (dispatch:Dispatch<any>) { 
+                axios.put("http://localhost:8081/rest/user",
+                    JSON.stringify(userBody),
+                    {method:"put",headers:{"content-Type": "application/json"}}).then(res=>{
+                        dispatch(userList())
+                    });
+            }
+}
+
 // 删除用户
 export function deleteUser(userId:any) {
     console.log("删除用户action");
@@ -89,7 +99,7 @@ export function deleteUser(userId:any) {
 }
 
 // 更新用户输入
-export const updateUserInput =(input:any) => {
+export const updateInput =(input:any) => {
     return function (dispatch:Dispatch<any>) {
         dispatch({
             type: constants.UPDATE_USER,
@@ -112,6 +122,7 @@ export const getUser = (userId:string) => {
     }
 }
 
+// 初始化重置store
 export const reset = () => ({
     type: constants.RESET
   });

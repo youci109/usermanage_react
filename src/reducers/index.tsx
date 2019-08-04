@@ -1,7 +1,5 @@
-import  { combineReducers } from 'redux'
-import  userReducer, { userState }  from './../components/user/userReducer';
-import IUser from '../model/user.model';
-
+import { combineReducers } from 'redux'
+import userReducer, { userState } from './../components/user/userReducer';
 
 export interface IRootState {
   readonly userReducer: userState

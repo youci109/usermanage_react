@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import IUser from './../../model/user.model';
+import IUser from '../../model/user.model';
 import {
   addUser,
   updateUser,
   updateInput,
   getUser,
   reset
-} from './../../actions/index';
+} from '../../actions/index';
 import { Layout, Form, Icon, Input, Button } from 'antd';
 import { IRootState } from '../../reducers';
 import { RouteComponentProps } from 'react-router-dom';
@@ -34,10 +34,22 @@ class UserUpdate extends Component<IProps, Istate> {
     };
   }
 
+
+
+  componentWillReceiveProps(nextProps: any) {
+    console.log(nextProps)
+  }
+
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    console.log(nextProps);
+
+    return true
+  }
+
   componentWillUpdate(nextProps: any, nextState: any) {
-    // if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
-    //     this.handleClose()
-    // }
+    if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
+      this.handleClose();
+    }
   }
 
   componentWillMount() {
@@ -87,13 +99,13 @@ class UserUpdate extends Component<IProps, Istate> {
         <Layout>
           <Header style={{ backgroundColor: '#1890ff' }}>
             <Link to="/">
-              <span style={{ color: 'white' }}>用户信息</span>
+              <span style={{ color: 'white' }}>{this.state.new_user ? "新增用户信息" : "编辑用户信息"}</span>
             </Link>
           </Header>
           <Content style={{ marginLeft: 200, marginRight: 200 }}>
             <Form onSubmit={this.handleSubmit} className="login-form">
               <br />
-              <Form.Item>
+              <Form.Item >
                 <Input
                   prefix={
                     <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
@@ -142,7 +154,7 @@ class UserUpdate extends Component<IProps, Istate> {
                   htmlType="submit"
                   style={{ marginRight: 10 }}
                 >
-                  注册
+                  更新
                 </Button>
                 <Button
                   type="primary"

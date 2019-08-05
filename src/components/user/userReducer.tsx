@@ -35,11 +35,12 @@ export default (state: userState = initstate, action: any): userState => {
     //     state.users.splice(action.payload, 1)
     //     const newState = JSON.parse(JSON.stringify(state));
     //     return { ...state, ...newState }
-    case contants.UPDATE_USER:
-      return { ...state, updateSuccess: true, user: action.payload };
-    case contants.GET_USER:
+    case contants.UPDATE_USER_INPUT:
       return { ...state, user: action.payload };
+    case contants.GET_USER:
+      return { ...state, user: action.payload, updateSuccess: false };
     case contants.ADD_USER:
+    case contants.UPDATE_USER:
       return { ...state, updateSuccess: true };
     case contants.RESET:
       return {

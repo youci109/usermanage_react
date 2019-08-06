@@ -50,6 +50,44 @@ class UserDetail extends React.Component<Props> {
                         >
                             返回
                         </Button>
+                        <div>
+                            <div></div>
+                            <p></p>
+                        </div>
+                        <div>
+                            <p></p>
+                        </div>
+                        <ul>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <div id="divId">
+                            <p className="st">k</p>
+                            <p className="st"></p>
+                            <p className="st"></p>
+                        </div>
+                        <div className="cs1 us2 jj" id="divId">
+                            <p className="tt"></p>
+                            <div id=""></div>
+                        </div>
+                        <a href="" target="" title="iop"></a>
+                        <a href="" target="" title="iop"></a>
+                        <a href="" target="" title="iop"></a>
+                        <div>
+                            <ul>
+                                <li className="item-1"></li>
+                                <li className="item-2"></li>
+                                <li className="item-3"></li>
+                            </ul>
+                        </div>
+                        {/* div>ul>li.item-$@-*3 */}
+                        {/* div>ul>li.item$@2*3 */}
+                        {/* div>p{hello}+div */}
+                        {/* p{what is your name}+p{xiaoxi} */}
+
                     </Content>
                 </Layout>
             </div>

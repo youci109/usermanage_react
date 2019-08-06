@@ -6,9 +6,9 @@ import { Dispatch } from 'redux';
 export const userList = () => {
     console.log("获取用户action");
 
-    return function (dispatch: Dispatch<any>) {
+    return async function (dispatch: Dispatch<any>) {
         // axios.get("api/api.json")
-        axios.get("http://localhost:8081/rest2/users")
+       await axios.get("http://localhost:8081/rest2/users")
             .then(res => {
                 dispatch({
                     type: constants.FETCH_USERLIST,
@@ -31,8 +31,8 @@ export const userList = () => {
 // 添加用户
 export const addUser = (userBody: Object) => {
     console.log("添加用户action");
-    return function (dispatch: Dispatch<any>) {
-        axios.post("http://localhost:8081/rest/user",
+    return async function (dispatch: Dispatch<any>) {
+      await  axios.post("http://localhost:8081/rest/user",
             JSON.stringify(userBody),
             { method: "post", headers: { "content-Type": "application/json" } }).then(res => {
                 dispatch({
@@ -62,8 +62,8 @@ export const addUser = (userBody: Object) => {
 // 更新用户
 export const updateUser = (userBody: Object) => {
     console.log("更新用户action");
-    return function (dispatch: Dispatch<any>) {
-        axios.put("http://localhost:8081/rest/user",
+    return async function (dispatch: Dispatch<any>) {
+       await axios.put("http://localhost:8081/rest/user",
             JSON.stringify(userBody),
             { method: "put", headers: { "content-Type": "application/json" } }).then(res => {
                 // dispatch(userList())
@@ -78,8 +78,8 @@ export const updateUser = (userBody: Object) => {
 export function deleteUser(userId: any) {
     console.log("删除用户action");
 
-    return function (dispatch: Dispatch<any>) {
-        axios.delete("http://localhost:8081/rest/user?userId=" + userId)
+    return async function (dispatch: Dispatch<any>) {
+      await  axios.delete("http://localhost:8081/rest/user?userId=" + userId)
             .then(ref => {
                 dispatch(userList())
             }
@@ -112,8 +112,8 @@ export const updateInput = (input: any) => {
 
 // 获取用户信息
 export const getUser = (userId: string) => {
-    return function (dispatch: Dispatch<any>) {
-        axios.get("http://localhost:8081/rest/user",
+    return async function (dispatch: Dispatch<any>) {
+       await axios.get("http://localhost:8081/rest/user",
             { method: "get", params: { "userId": userId } })
             .then(res => {
                 dispatch({

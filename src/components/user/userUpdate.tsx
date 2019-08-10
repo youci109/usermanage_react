@@ -54,6 +54,9 @@ class UserUpdate extends Component<IProps, Istate> {
 
   componentWillMount() {
     if (this.state.new_user) {
+      console.log("++++++")
+      console.log(this.props.location.state.name)
+      console.log("++++++")
       this.props.reset();
     } else {
       this.props.getUser(this.props.match.params.id);
@@ -98,7 +101,7 @@ class UserUpdate extends Component<IProps, Istate> {
       <div>
         <Layout>
           <Header style={{ backgroundColor: '#1890ff' }}>
-            <Link to="/">
+            <Link to='/user'>
               <span style={{ color: 'white' }}>{this.state.new_user ? "新增用户信息" : "编辑用户信息"}</span>
             </Link>
           </Header>

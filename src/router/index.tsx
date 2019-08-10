@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter,Switch} from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import UserRoute from "../components/user/index";
 
 
@@ -8,7 +8,7 @@ const RootRouter = () => {
         <div>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/"  component={ UserRoute }/>
+                    <Route path="/" component={UserRoute} />
                 </Switch>
             </BrowserRouter>
         </div>

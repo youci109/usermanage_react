@@ -7,7 +7,7 @@ import { IRootState } from '../../reducers';
 import { Link, RouteComponentProps } from 'react-router-dom'
 import './users.css';
 import { List, Typography, Layout, Button } from 'antd';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 interface Props extends RouteComponentProps {
@@ -43,9 +43,12 @@ class User extends Component<Props, state>{
             <div>
                 <Layout>
                     <Header style={{ backgroundColor: "#1890ff" }} >
-                        <Link to={match.url}><span style={{ color: "white" }}>用户列表</span></Link>
+                        <Link to={match.url}>
+                            <FontAwesomeIcon icon="sign-in-alt" />
+                            <span style={{ color: "white" }}>1用户列表</span></Link>
 
-                        <Link to={`/new`}><Button style={{ marginLeft: 10 }}>新增</Button></Link>
+                        <Link to={`/new`}><Button style={{ marginLeft: 10 }}> 新增</Button></Link>
+                        <Link to={{ pathname: `/new`, state: { "name": "xiaoxi123456" } }}><Button style={{ marginLeft: 10 }}>新增2</Button></Link>
                     </Header>
                     <Content>
                         <List

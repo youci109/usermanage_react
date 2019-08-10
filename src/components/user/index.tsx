@@ -13,10 +13,10 @@ const Routes = (props: Props) => {
   return (
     <div>
       <Switch>
+        <Route path="/:id/edit" exact={true} component={UserUpdate} />
+        <Route path="/new" exact={true} component={UserUpdate} />
+        <Route path="/:id" exact={true} component={UserDetail} />
         <Route path="/" exact={true} component={Users} />
-        <Route path={`/:id/edit`} exact={true} component={UserUpdate} />
-        <Route path={`/new`} exact={true} component={UserUpdate} />
-        <Route path={`/:id`} exact={true} component={UserDetail} />
       </Switch>
     </div>
   );

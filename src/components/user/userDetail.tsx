@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IRootState } from '../../reducers';
@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { Layout, Descriptions, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
 interface Props extends RouteComponentProps<{ id: string }> {
     user: IUser;
     getUser(userId: string): void;
@@ -24,14 +23,15 @@ class UserDetail extends React.Component<Props> {
     }
 
     render() {
-
         const user = this.props.user;
         const { Header, Content } = Layout;
         return (
             <div>
                 <Layout>
-                    <Header style={{ backgroundColor: '#1890ff' }}><FontAwesomeIcon color={"red"} icon={faCoffee}  />
-                        <Link to="/">
+                    <Header style={{ backgroundColor: '#1890ff' }}>
+                        <FontAwesomeIcon icon={faCoffee} />
+                        <FontAwesomeIcon icon="sign-out" />
+                        <Link to='/user'>
                             <span style={{ color: 'red' }}>用户信息</span>
                         </Link>
                     </Header>
@@ -50,43 +50,6 @@ class UserDetail extends React.Component<Props> {
                         >
                             返回
                         </Button>
-                        <div>
-                            <div></div>
-                            <p></p>
-                        </div>
-                        <div>
-                            <p></p>
-                        </div>
-                        <ul>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <div id="divId">
-                            <p className="st">k</p>
-                            <p className="st"></p>
-                            <p className="st"></p>
-                        </div>
-                        <div className="cs1 us2 jj" id="divId">
-                            <p className="tt"></p>
-                            <div id=""></div>
-                        </div>
-                        <a href="" target="" title="iop"></a>
-                        <a href="" target="" title="iop"></a>
-                        <a href="" target="" title="iop"></a>
-                        <div>
-                            <ul>
-                                <li className="item-1"></li>
-                                <li className="item-2"></li>
-                                <li className="item-3"></li>
-                            </ul>
-                        </div>
-                        {/* div>ul>li.item-$@-*3 */}
-                        {/* div>ul>li.item$@2*3 */}
-                        {/* div>p{hello}+div */}
-                        {/* p{what is your name}+p{xiaoxi} */}
 
                     </Content>
                 </Layout>
